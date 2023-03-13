@@ -1,20 +1,69 @@
-// Task.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <ctime>
+
+/*
+	
+	Task.
+		Implement the sort of the array with 10 elements.
+		Initializing of the array - console inputed.
+		The algorithm of the sort - student can choose any the sort algorithm.
+		The work with the array must be done through the pointer
+		(for example: for access to the first element used - *(array + 1)).
+
+*/
+
+void InitializeArray(int* arr, const int size);
+void ShowArray(int* arr, const int size);
+void ShowSortedArray(int* arr, const int size);
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	srand(time(nullptr));
+
+	const int size = 10;
+	int arr[size];
+
+	InitializeArray(arr, size);
+	ShowArray(arr, size);
+	ShowSortedArray(arr, size);
+
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void InitializeArray(int* arr, const int size)
+{
+	std::cout << "Fill the array with elements (10 elements): \n\n";
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	for (int index = 0; index < size; index++)
+	{
+		std::cout << index + 1 << ". ";
+		std::cin >> *(arr + index);
+	}
+
+	std::cout << std::endl;
+}
+
+void ShowArray(int* arr, const int size)
+{
+	std::cout << "Your array: ";
+
+	for (int index = 0; index < size; index++)
+		std::cout << *(arr + index) << " ";
+
+	std::cout << std::endl;
+}
+
+void ShowSortedArray(int* arr, const int size)
+{
+	for (int index = 0; index < size; index++)
+		for (int j = index + 1; j < size; j++)
+			if (*(arr + j) < *(arr + index))
+				std::swap(*(arr + index), *(arr + j));
+
+	std::cout << "Sorted the array from the minimum element to the maximum element: ";
+
+	for (int index = 0; index < size; index++)
+		std::cout << *(arr + index) << " ";
+
+	std::cout << std::endl;
+}
